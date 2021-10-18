@@ -1,0 +1,62 @@
+<form *ngIf='flag' [formGroup]='myForm' >
+    <div>
+         <p>
+    <mat-form-field  class="example-full-width" appearance="fill">
+        <mat-label >id</mat-label>
+        <input color='primary' matInput [value]=owner.id formControlName='id'>
+      </mat-form-field>    
+</p>
+<p>
+   <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput [value]=owner.aLastName formControlName='aLastName'>
+      </mat-form-field>       
+</p>
+<p>
+    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>First name</mat-label>
+    <input matInput [value]=owner.aFirstName formControlName='aFirstName'>
+  </mat-form-field>
+    </p>
+<p>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Middle name</mat-label>
+        <input matInput [value]=owner.aMiddleName formControlName='aMiddleName'>
+      </mat-form-field>   
+</p>
+    </div>
+<h1>Автомобили</h1>
+<div style="margin-left: 100px;" formArrayName='aCars'>
+   <p *ngFor='let car of owner.aCars; index as i' [formGroupName]='i'>
+    <mat-form-field  appearance="fill">
+        <mat-label>number</mat-label>
+        <input matInput [value]='car.number' formControlName='number'>
+      </mat-form-field>  
+      <mat-form-field  appearance="fill">
+        <mat-label>manufacturer</mat-label>
+        <input matInput  [value]='car.manufacturer'formControlName='manufacturer'>
+      </mat-form-field> 
+      <mat-form-field appearance="fill">
+        <mat-label>model</mat-label>
+        <input matInput [value]='car.model' formControlName='model'>
+      </mat-form-field>  
+      <mat-form-field  appearance="fill">
+        <mat-label>year</mat-label>
+        <input matInput  [value]='car.year' formControlName='year'>
+      </mat-form-field> 
+      <button (click)='deleteCar(i)' mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon> 
+      </button>
+        </p>
+  <button mat-raised-button color="accent" (click)='addCar()' *ngIf='flag'>addNewCar</button>
+</div>
+</form>
+<div><button (click)='log()'*ngIf="!flag" mat-raised-button>Нажмите на кнопку подтверждая действие</button></div>
+<div style="margin-top: 20px; margin-left: 650px;"><button routerLink= '/' mat-raised-button >Назад</button><button *ngIf='flag' mat-raised-button color="accent" [disabled]="myForm.invalid" (click)='onSubmit()'>Отправить</button></div>
+ 
+
+
+
+
+
+
